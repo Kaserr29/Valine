@@ -23,6 +23,40 @@
 
 
 public class Sequence {
+	int longueur;
+	int etendue;
+	int [][] sequence;
+	Gamme G;
+	
+	public Sequence(int l,int e, int[][] s, Gamme g){
+		this.longueur= l;
+		this.etendue = e;
+		this.sequence = s;
+		this.G =g ;
+		
+	}
+	
+	public String toString(){
+		String description = "la séquence dure "+longueur+" mesures. Elle s'étend sur "+ etendue+" octaves.";
+		return description;
+	}
+	
+	public int[][] genererSequence(){
+		int [][]tab =new int[longueur][4];
+			for(int i= 0; i<=longueur; i++){
+				for(int j=0; j<=4; j++){
+					tab[i][j] = Math.random() * (g.gamme.length-1);
+				}
+			}
+		return tab;
+	}
+		
+		
+	
+	
+	
+	
+		 
 	
 }
 
