@@ -5,7 +5,7 @@ Le projet “Valine” a pour objectif de permettre à l’Utilisateur de géné
 L’intérêt est, pour l’Utilisateur, d’être aidé par exemple dans la composition musicale, ou pour savoir rapidement à quoi pourrait ressembler une mélodie selon ses désirs.
 Quels sont les paramètres accessibles à l’Utilisateur ?
 Pour générer sa séquence, l’Utilisateur devra régler différents paramètres, avant que le programme s’exécute. Comme paramètres, nous avons retenus :
-'''
+```
 Le type d’instrument (la librairie contient en effet plusieurs sons différents)
 Le tempo de la séquence
 La tonalité de la séquence
@@ -13,13 +13,13 @@ Octave
 Le type de gamme
 Etendue d’octaves que Väline peut utiliser
 La longueur de la séquence (en mesure)
-'''
+```
 
 ##  A quoi ressemblera la séquence de notes ?
 
 Väline sera programmé pour générer une séquence de noires dont la hauteur de la note est définie aléatoirement. Il y aura donc 4 notes par mesure.
 Comment la séquence sera-t-elle générée et jouée ?
-L’utilisateur pourra entrer les différents paramètres sur lesquels il souhaite influer depuis la console avec la forme suivante : “C#0 mineur 2 120 4 piano”, avec dans l’ordre, 'tonalite' et 'octave', 'mode', 'etendue', 'tempo', 'longueur', 'instrument'.
+L’utilisateur pourra entrer les différents paramètres sur lesquels il souhaite influer depuis la console avec la forme suivante : “C#0 mineur 2 120 4 piano”, avec dans l’ordre, `tonalite` et `octave`, `mode`, `etendue`, `tempo`, `longueur`, `instrument`.
 La classe Gamme permettra, à partir du tableau 2D mode, de générer la gamme demandé par l’utilisateur.
 La classe Sequencer génère une séquence de notes aléatoires d’après les paramètres entrés par l’utilisateur et la gamme précédemment générée.
 La classe Synthétiseur utilise la libraire Javax.sound.midi (nativement présente) afin de jouer la séquence précédemment généré, tempo et avec l’instrument voulu par l’utilisateur.
