@@ -28,18 +28,20 @@ import javax.sound.midi.MidiUnavailableException;
 
 public class Synth{
 	int tempo;
-	Sequence Seq;
-	int[][] sequence;
+	int instrument;
+	//Sequence Seq;
+	int[][] sequence = {{120,125,110,120}};
 	int dureeNote;
-
-	public Synth(Sequence s, int t){
+	
+	public Synth(/*Sequence s, */int t, int i){
 		this.tempo = t;
+		this.instrument = i;
 		this.dureeNote = calculDureeNote(this.tempo);
-		this.sequence = s.sequence;
+		//this.sequence = s.sequence;
 	}
 	
 /**
- * /!\TEMPORAIRE/!\ Joue la sequence en bouble 
+ * Joue la sequence en bouble 
  */
 	public void jouer(){
 		while(true){
@@ -53,7 +55,7 @@ public class Synth{
  */
 	public int calculDureeNote(int t){
 		int d = (int)((60.0/(double)t)*1000);
-		System.out.println("TEMPO : "+ d); 
+		System.out.println("TEMPO : "+ t); 
 		return d;
 	}
 /**
@@ -92,7 +94,8 @@ public class Synth{
 		}
 
 		MidiChannel[] channels = synth.getChannels();
-		MidiChannel	channel = channels[0];
+		MidiChannel	channel = channels[instrument];
+		System.out.println("MidiChannel: " + channel);
 		channel.noteOn(note, 127);
 
 		try{
@@ -102,7 +105,6 @@ public class Synth{
 		{}
 		channel.noteOff(note);
 		synth.close();
-
 	}
 }
 
