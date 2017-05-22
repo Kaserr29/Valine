@@ -94,8 +94,8 @@ public class Synth{
 		}
 
 		MidiChannel[] channels = synth.getChannels();
-		MidiChannel	channel = channels[instrument];
-		System.out.println("MidiChannel: " + channel);
+		MidiChannel	channel = channels[0];
+		channel.programChange(instrument);
 		channel.noteOn(note, 127);
 
 		try{
