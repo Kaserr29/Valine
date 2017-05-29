@@ -28,11 +28,11 @@ public class Sequence {
 	int [][] sequence;
 	Gamme G;
 	
-	public Sequence(int l,int e, int[][] s, Gamme g){
+	public Sequence(int l,int e, Gamme g){
 		this.longueur= l;
 		this.etendue = e;
-		this.sequence = s;
-		this.G =g ;
+		this.G = g;
+        this.sequence = genererSequence(G);
 		
 	}
 	
@@ -41,13 +41,13 @@ public class Sequence {
 		return description;
 	}
 	
-	public int[][] genererSequence(){
-		int [][]tab =new int[longueur][4];
-			for(int i= 0; i<=longueur; i++){
-				for(int j=0; j<=4; j++){
-					tab[i][j] = Math.random() * (g.gamme.length-1);
-				}
-			}
+	public int[][] genererSequence(Gamme ref){
+		int [][]tab = new int[longueur][4];
+            for(int i=0;i<tab.length;i++){
+                for(int j=0;j<tab[i].length;j++){
+                    tab[i][j] = ref.s[(int)(Math.round(Math.random()*(ref.s.length-1)))]+(int)(12*(Math.round(Math.random()*(etendue-1))));
+                }
+            }
 		return tab;
 	}
 		

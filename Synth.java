@@ -13,14 +13,14 @@ import javax.sound.midi.MidiUnavailableException;
 public class Synth{
 	int tempo;
 	int instrument;
-	Sequence Seq;
+	Sequence seq;
 	int dureeNote;
 	
 	public Synth(Sequence s, int t, int i){
 		this.tempo = t;
 		this.instrument = i;
 		this.dureeNote = calculDureeNote(this.tempo);
-		this.sequence = s.sequence;
+		this.seq = s;
 	}
 	
 /**
@@ -28,7 +28,7 @@ public class Synth{
  */
 	public void jouer(){
 		while(true){
-			iterSequence(this.sequence);
+			iterSequence(seq.sequence);
 		}
 	}
 /**
