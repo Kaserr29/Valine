@@ -1,24 +1,8 @@
-/*
- * Synth.java
+/**
+ * Classe Synth
+ * Permet de jouer la séquence avec un instrument et un tempo
  * 
- * Copyright 2017 Lucas Corentin <clucas@pc107-043-07>
- * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- * 
- * 
+ * @author Corentin LUCAS
  */
 
 import javax.sound.midi.MidiSystem;
@@ -29,15 +13,14 @@ import javax.sound.midi.MidiUnavailableException;
 public class Synth{
 	int tempo;
 	int instrument;
-	//Sequence Seq;
-	int[][] sequence = {{120,125,110,120}};
+	Sequence Seq;
 	int dureeNote;
 	
-	public Synth(/*Sequence s, */int t, int i){
+	public Synth(Sequence s, int t, int i){
 		this.tempo = t;
 		this.instrument = i;
 		this.dureeNote = calculDureeNote(this.tempo);
-		//this.sequence = s.sequence;
+		this.sequence = s.sequence;
 	}
 	
 /**
