@@ -22,12 +22,13 @@
  */
 // Groupe 3 
 // Projet "Valine", par B. SORIN, C. LUCAS, T.LEFEBVRE
-// rédacteur de la  classe : T. LEFEBVRE
+// Rédacteur de la  classe : T. LEFEBVRE
 
 
 public class Gamme {
-	static int [][] init = { {0,2,4,5,7,9,11},{0,2,3,5,7,8,10} };
-	int [] s;
+	static int [] init0 = {0,2,4,5,7,9,11};
+	static int [] init1 = {0,2,3,5,7,8,10};
+	int [] s = {0,0,0,0,0,0,0};
 	int mode;
 	int tonalite;
 	int octave;
@@ -36,24 +37,34 @@ public class Gamme {
 		mode = m;
 		tonalite = t;
 		octave = o;
+		s = generator(s);
+		
 	}
 	
-	public int [] generator ()	{
+	public int [] generator (int [] a)	{
 		
-		for (int i = 0 ; i < s.length ; i++) {
+		for (int i = 0 ; i < a.length ; i++) {
 			if (mode == 0)	{
-				s[i] = init [0][i];
+				s[i] = init0[i];
 			} else if (mode == 1)	{
-				s[i] = init [1][i];
+				s[i] = init1[i];
 			} 
-			s[i] += tonalite;
-			s[i] += octave;
+			s[i] = s[i] + tonalite;
+			s[i] = s[i] + 12*octave;
 		}
-	return s;	
-	}	
+		return a;
+	}
+	
+	public String afficheString(int[] a)	{
+		String r = "";
+		for (int i=0 ; i<a.length ; i++)	{
+				r += a[i] +" | ";
+			}
+		return r;
+	}
 	
 	public String toString()	{
-		return "Mode : "+this.mode+"; Tonalite : "+this.tonalite+"; Octave ; "+this.octave ;
+		return "Gamme : "+afficheString(s);
 	}
 		
 	
