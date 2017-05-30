@@ -101,7 +101,7 @@ public class Play {
         int r = -1;
         for(int i = 0; i<ref.length; i++){
             if(arg.charAt(0) == ref[i]){
-                r = i+1;
+                r = i;
                 break;
             }
         }
