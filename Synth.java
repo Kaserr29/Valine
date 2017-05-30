@@ -1,10 +1,12 @@
 /**
+ * Projet Valine - Thomas LEFEBVRE, Baptiste SORIN, Corentin LUCAS (Groupe 3)
  * Classe Synth
  * Permet de jouer la séquence avec un instrument et un tempo
  * 
  * @author Corentin LUCAS
  */
 
+//Librairies pour l'utilisation du synthétiseur midi java
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Synthesizer;
 import javax.sound.midi.MidiChannel;
@@ -15,7 +17,8 @@ public class Synth{
 	int instrument;
 	Sequence seq;
 	int dureeNote;
-	
+
+	//Constructeur du synthétiseur
 	public Synth(Sequence s, int t, int i){
 		this.tempo = t;
 		this.instrument = i;
@@ -43,7 +46,7 @@ public class Synth{
 	}
 /**
  * Parcours la sequence de notes et la fait jouer par le synthetiseur de JAVA
- * @param seq Tableau de la séquence précédement généré
+ * @param seq Sequence a jouer
  */
 	public void iterSequence(int[][] seq){
 		for(int i = 0; i<seq.length; i++){
@@ -60,14 +63,16 @@ public class Synth{
 	public void jouerNote(int note){
 		Synthesizer	synth = null;
 
+		//Gestion des erreurs si le synthétiseur n'est pas disponible
 		try{
 			synth = MidiSystem.getSynthesizer();
 		}
 		catch(MidiUnavailableException e){
-			e.printStackTrace();
-			System.exit(1);
+			e.printStackTrace(); //affiche erreur
+			System.exit(1); //ferme le programme
 		}
 
+		//Gestion des erreurs si le synthétiseur n'est pas disponible
 		try{
 			synth.open();
 		}
@@ -78,16 +83,16 @@ public class Synth{
 
 		MidiChannel[] channels = synth.getChannels();
 		MidiChannel	channel = channels[0];
-		channel.programChange(instrument);
-		channel.noteOn(note, 127);
+		channel.programChange(instrument); // changement d'instrument
+		channel.noteOn(note, 127); //commencer a jouer la note
 
 		try{
-			Thread.sleep(dureeNote);
+			Thread.sleep(dureeNote); //pause = durrée de la note
 		}
-		catch (InterruptedException e)
-		{}
-		channel.noteOff(note);
-		synth.close();
+		catch (InterruptedException e){
+		}
+		channel.noteOff(note);//arreter de jouer la note
+		//synth.close();
 	}
 }
 

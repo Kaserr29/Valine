@@ -1,4 +1,5 @@
 /**
+ * Projet Valine - Thomas Lefebvre, Baptiste Sorin, Corentin Lucas (Groupe 3)
  * Classe Play (Main)
  * Interface utlisateur
  * 
@@ -21,7 +22,6 @@ public class Play {
         System.out.println("              Sequencer audio Java                  ");
         System.out.println("");
         
-        //Comportement par defaut
 		int instrument = 0;
         int longueur = 0;
         int tempo = 0;
@@ -35,7 +35,7 @@ public class Play {
         
         //Selection de la note
         do{
-            System.out.println("-> Choisir note : (A, A#, B, C, C#, D, D#, E, E, F, F#, G, G#)");
+            System.out.println("-> Choisir note : (A, A#, B, C, C#, D, D#, E, F, F#, G, G#)");
             note = detecteNote(sc.nextLine());
             System.out.println("");
         }while(note==-1);
@@ -52,7 +52,7 @@ public class Play {
             System.out.println("-> Choisir mode : (majeur, mineur)");
             mode = detecteMode(sc.nextLine());
             System.out.println("");
-        }while(mode==-1);
+        }while(mode<0 || mode>1));
         
         //Selection de l'étendue
         do{
@@ -66,7 +66,7 @@ public class Play {
             System.out.println("-> Choisir le tempo en bpm' : (1 a 240)");
             tempo = detecterInt(sc.nextLine());
             System.out.println("");
-        }while(etendue<1 || etendue>240);
+        }while(tempo<1 || tempo>240);
         
         //Selection de la longueur
         do{
@@ -75,20 +75,20 @@ public class Play {
             System.out.println("");
         }while(etendue<1 || etendue>10);
         
-        //Selection de l'instrument'
+        //Selection de l'instrument
         do{
             System.out.println("-> Choisir l'instrument : (1 a 127)");
             instrument = detecterInt(sc.nextLine());
             System.out.println("");
-        }while(etendue<1 || etendue>127);
+        }while(instrument<1 || instrument>127);
         
         System.out.println("########## LECTURE ##########");
         
-        Gamme playGamme = new Gamme(mode, note, octave);
-        Sequence playSequence = new Sequence(longueur, etendue, playGamme);
-        Synth playSynth = new Synth(playSequence, tempo, instrument);
+        Gamme playGamme = new Gamme(mode, note, octave); //Creer gamme
+        Sequence playSequence = new Sequence(longueur, etendue, playGamme); //Creer Sequence
+        Synth playSynth = new Synth(playSequence, tempo, instrument); //Creer Synthetiseur
         
-        playSynth.jouer();
+        playSynth.jouer(); //Jouer la sequence
 	}
     
 /**
@@ -97,7 +97,7 @@ public class Play {
  * @return note en notation MIDI
  */
     public static int detecteNote(String arg){
-        char[] ref = {'C',' ','D',' ','E','F',' ','G',' ','A',' ','B'};
+        char[] ref = {'C',' ','D',' ','E','F',' ','G',' ','A',' ','B'}; // Les index correspondent a la note midi 
         int r = -1;
         for(int i = 0; i<ref.length; i++){
             if(arg.charAt(0) == ref[i]){
@@ -105,10 +105,10 @@ public class Play {
                 break;
             }
         }
-        if(r!=-1 && !arg.equals(" ") && arg.length()==1){
+        if(r!=-1 && !arg.equals(" ") && arg.length()==1){ //si la note n'a ni "#" ni "b"
             r=r;
         }
-        else if(r!=-1 && !arg.equals(" ") && arg.length()==2){
+        else if(r!=-1 && !arg.equals(" ") && arg.length()==2){ //si il y a "#" ou "b"
             if(arg.charAt(1) == '#'){
                 r++;
             }
@@ -148,6 +148,7 @@ public class Play {
  */
     public static int detecterInt(String arg){
             int r = -1;
+            // Gestion de l'erreur si une lettre est rentrée
             try{
                 r = Integer.parseInt(arg);
             }catch(Exception e){
@@ -156,4 +157,3 @@ public class Play {
             return r;
     }
 }
-
