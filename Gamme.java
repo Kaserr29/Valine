@@ -1,34 +1,15 @@
-/*
- * Gamme.java
+/** 
+ * Projet Valine - Thomas LEFEBVRE, Baptiste SORIN, Corentin LUCAS (Groupe 3 )
+ * Classe Gamme
+ * Permet de créer un tableau 1D contenant les notes de la gamme
  * 
- * Copyright 2017 Lucas Corentin <clucas@pc107-043-07>
- * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- * 
- * 
+ * @author Thomas LEFEBVRE
  */
-// Groupe 3 
-// Projet "Valine", par B. SORIN, C. LUCAS, T.LEFEBVRE
-// Rédacteur de la  classe : T. LEFEBVRE
 
 
 public class Gamme {
-	static int [] init0 = {0,2,4,5,7,9,11};
-	static int [] init1 = {0,2,3,5,7,8,10};
-	int [] s = {0,0,0,0,0,0,0};
+	static int [][] init = {{0,2,4,5,7,9,11},{0,2,3,5,7,8,10}};
+	int [] s;
 	int mode;
 	int tonalite;
 	int octave;
@@ -37,24 +18,28 @@ public class Gamme {
 		mode = m;
 		tonalite = t;
 		octave = o;
-		s = generator(s);
+		s = generator();
 		
 	}
 	
-	public int [] generator (int [] a)	{
-		
+/** 
+ * Crée le tableau 1D contenant les notes de la gamme (au format MIDI)
+ * @param mode Majeur (valeur 0) ou Mineur (valeur 1)
+ * @param tonalite (de 0 = Do à 11 = Si)
+ * @param octave (de 0 = première octave à 
+ */
+	public int [] generator ()	{
+		int [] a = {0,0,0,0,0,0,0};
 		for (int i = 0 ; i < a.length ; i++) {
-			if (mode == 0)	{
-				s[i] = init0[i];
-			} else if (mode == 1)	{
-				s[i] = init1[i];
-			} 
-			s[i] = s[i] + tonalite;
-			s[i] = s[i] + 12*octave;
+			a[i] = init [mode][i];			
+			a[i] += tonalite;
+			a[i] += 12*octave;
 		}
 		return a;
 	}
-	
+/** 
+ * Permet d'afficher le contenu du tableau, c'est à dire les valeurs des notes (de 0 & 127, format MIDI)
+ */
 	public String afficheString(int[] a)	{
 		String r = "";
 		for (int i=0 ; i<a.length ; i++)	{
@@ -63,10 +48,11 @@ public class Gamme {
 		return r;
 	}
 	
+/** 
+ * Permet de tester le fonctionnement de la classe Gamme (inutile pour l'execution générale du programme)
+ */
 	public String toString()	{
 		return "Gamme : "+afficheString(s);
 	}
-		
-	
 }
 
