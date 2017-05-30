@@ -63,17 +63,17 @@ public class Play {
         
         //Selection du tempo
         do{
-            System.out.println("-> Choisir le tempo en bpm' : (1 a 240)");
+            System.out.println("-> Choisir le tempo en bpm : (1 a 240)");
             tempo = detecterInt(sc.nextLine());
             System.out.println("");
         }while(tempo<1 || tempo>240);
         
         //Selection de la longueur
         do{
-            System.out.println("-> Choisir la longueur de mesures' : (1 a 10)");
+            System.out.println("-> Choisir la longueur de mesures : (1 a 10)");
             longueur = detecterInt(sc.nextLine());
             System.out.println("");
-        }while(etendue<1 || etendue>10);
+        }while(longueur<1 || longueur>10);
         
         //Selection de l'instrument
         do{
@@ -124,7 +124,7 @@ public class Play {
     }
     
 /**
- * Transforme chaine de caractere en int represenatant un mode avec gestion des erreurs
+ * Transforme chaine de caractere en int representant un mode avec gestion des erreurs
  * @param arg entree utilisateur
  * @return int representant un mode
  */
