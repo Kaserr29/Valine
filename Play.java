@@ -11,16 +11,17 @@ import java.util.Scanner;
 public class Play {
 	
 	public static void main (String args[]) {
-        
-        System.out.println("##     ##    ###    ##       #### ##    ## ######## ");
-        System.out.println("##     ##   ## ##   ##        ##  ###   ## ##       ");
-        System.out.println("##     ##  ##   ##  ##        ##  ####  ## ##       ");
-        System.out.println("##     ## ##     ## ##        ##  ## ## ## ######   ");
-        System.out.println(" ##   ##  ######### ##        ##  ##  #### ##       ");
-        System.out.println("  ## ##   ##     ## ##        ##  ##   ### ##       ");
-        System.out.println("   ###    ##     ## ######## #### ##    ## ######## ");
-        System.out.println("              Sequencer audio Java                  ");
-        System.out.println("");
+
+        System.out.println("------------------------------------------------------");
+        System.out.println("|##     ##    ###    ##       #### ##    ## ######## |");
+        System.out.println("|##     ##   ## ##   ##        ##  ###   ## ##       |");
+        System.out.println("|##     ##  ##   ##  ##        ##  ####  ## ##       |");
+        System.out.println("|##     ## ##     ## ##        ##  ## ## ## ######   |");
+        System.out.println("| ##   ##  ######### ##        ##  ##  #### ##       |");
+        System.out.println("|  ## ##   ##     ## ##        ##  ##   ### ##       |");
+        System.out.println("|   ###    ##     ## ######## #### ##    ## ######## |");
+        System.out.println("|              Sequencer audio Java                  |");
+        System.out.println("------------------------------------------------------");
         
 		int instrument = 0;
         int longueur = 0;
@@ -42,10 +43,10 @@ public class Play {
         
         //Selection de l'octave
         do{
-            System.out.println("-> Choisir l'octaves' : (0 a 9)");
+            System.out.println("-> Choisir l'octave : (2 a 9)");
             octave = detecterInt(sc.nextLine());
             System.out.println("");
-        }while(etendue<0 || etendue>9);
+        }while(octave<2 || octave>9);
         
         //Selection du Mode
         do{
@@ -63,10 +64,10 @@ public class Play {
         
         //Selection du tempo
         do{
-            System.out.println("-> Choisir le tempo en bpm : (1 a 240)");
+            System.out.println("-> Choisir le tempo en bpm : (60 a 240)");
             tempo = detecterInt(sc.nextLine());
             System.out.println("");
-        }while(tempo<1 || tempo>240);
+        }while(tempo<60 || tempo>240);
         
         //Selection de la longueur
         do{

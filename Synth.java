@@ -32,6 +32,7 @@ public class Synth{
 	public void jouer(){
 		while(true){
 			iterSequence(seq.sequence);
+			System.out.println("|_________________|");
 		}
 	}
 /**
@@ -41,7 +42,7 @@ public class Synth{
  */
 	public int calculDureeNote(int t){
 		int d = (int)((60.0/(double)t)*1000);
-		System.out.println("TEMPO : "+ t); 
+		System.out.println("### TEMPO : "+ t+ "###"); 
 		return d;
 	}
 /**
@@ -50,9 +51,11 @@ public class Synth{
  */
 	public void iterSequence(int[][] seq){
 		for(int i = 0; i<seq.length; i++){
+			System.out.println("|=================|");
+				System.out.println("| MESURE : "+i+"      |");
 			for(int j = 0; j<seq[i].length; j++){
 				jouerNote(seq[i][j]);
-				System.out.println("Playing : "+ seq[i][j]);
+				System.out.println("|Note : "+ seq[i][j]+"        |");
 			}
 		}
 	}
