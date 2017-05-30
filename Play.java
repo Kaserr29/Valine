@@ -52,7 +52,7 @@ public class Play {
             System.out.println("-> Choisir mode : (majeur, mineur)");
             mode = detecteMode(sc.nextLine());
             System.out.println("");
-        }while(mode<0 || mode>1));
+        }while(mode<0 || mode>1);
         
         //Selection de l'étendue
         do{
