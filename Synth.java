@@ -52,7 +52,7 @@ public class Synth{
 	public void iterSequence(int[][] seq){
 		for(int i = 0; i<seq.length; i++){
 			System.out.println("|=================|");
-				System.out.println("| MESURE : "+i+"      |");
+				System.out.println("| MESURE : "+(int)(i+1)+"      |");
 			for(int j = 0; j<seq[i].length; j++){
 				jouerNote(seq[i][j]);
 				System.out.println("|Note : "+ seq[i][j]+"        |");
@@ -95,7 +95,6 @@ public class Synth{
 		catch (InterruptedException e){
 		}
 		channel.noteOff(note);//arreter de jouer la note
-		//synth.close();
 	}
 }
 

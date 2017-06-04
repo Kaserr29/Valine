@@ -35,53 +35,31 @@ public class Play {
         Scanner sc = new Scanner(System.in);
         
         //Selection de la note
-        do{
-            System.out.println("-> Choisir note : (A, A#, B, C, C#, D, D#, E, F, F#, G, G#)");
-            note = detecteNote(sc.nextLine());
-            System.out.println("");
-        }while(note==-1);
+        String[] nIn = {"A","A#","B","C","C#","D","D#","E","F","F#","G","G#"};
+        int[] nOut = {0,1,2,3,4,5,6,7,9,10,11,12};
+        note = choixString(nIn, nOut, "Choisir note : (A, A#, B, C, C#, D, D#, E, F, F#, G, G#)");
         
         //Selection de l'octave
-        do{
-            System.out.println("-> Choisir l'octave : (2 a 9)");
-            octave = detecterInt(sc.nextLine());
-            System.out.println("");
-        }while(octave<2 || octave>9);
+        octave = choixInt(2, 9, "Choisir l'octave : (2 a 9)");
         
         //Selection du Mode
-        do{
-            System.out.println("-> Choisir mode : (majeur, mineur)");
-            mode = detecteMode(sc.nextLine());
-            System.out.println("");
-        }while(mode<0 || mode>1);
+        String[] mIn = {"majeur","mineur"};
+        int[] mOut = {0,1};
+        mode = choixString(mIn, mOut, "Choisir mode : (majeur, mineur)");
         
         //Selection de l'étendue
-        do{
-            System.out.println("-> Choisir l'etendue en octaves' : (1 a 4)");
-            etendue = detecterInt(sc.nextLine());
-            System.out.println("");
-        }while(etendue<1 || etendue>4);
+        etendue = choixInt(1, 4, "Choisir l'etendue en octaves : (1 a 4)");
         
         //Selection du tempo
-        do{
-            System.out.println("-> Choisir le tempo en bpm : (60 a 240)");
-            tempo = detecterInt(sc.nextLine());
-            System.out.println("");
-        }while(tempo<60 || tempo>240);
+        tempo = choixInt(60, 240, "Choisir le tempo : (60 a 240)");
         
         //Selection de la longueur
-        do{
-            System.out.println("-> Choisir la longueur de mesures : (1 a 10)");
-            longueur = detecterInt(sc.nextLine());
-            System.out.println("");
-        }while(longueur<1 || longueur>10);
+        longueur = choixInt(1, 10, "Choisir la longueur de mesures : (1 a 10)");
         
         //Selection de l'instrument
-        do{
-            System.out.println("-> Choisir l'instrument : (1 a 127)");
-            instrument = detecterInt(sc.nextLine());
-            System.out.println("");
-        }while(instrument<1 || instrument>127);
+        String[] iIn = {"piano","harmonica","guitare","basse","violon","voix","trompette","flute"};
+        int[] iOut = {0,22,29,33,40,52,56,73};
+        instrument = choixString(iIn, iOut, "Choisir mode : (piano, harmonica, guitare, basse, violon, voix, trompette, flute)");
         
         System.out.println("########## LECTURE ##########");
         
@@ -93,59 +71,9 @@ public class Play {
 	}
     
 /**
- * Trasforme une chaine de caracteres en int representant ue note midi avec gestion des erreurs
- * @param arg entree utilisateur
- * @return note en notation MIDI
- */
-    public static int detecteNote(String arg){
-        char[] ref = {'C',' ','D',' ','E','F',' ','G',' ','A',' ','B'}; // Les index correspondent a la note midi 
-        int r = -1;
-        for(int i = 0; i<ref.length; i++){
-            if(arg.charAt(0) == ref[i]){
-                r = i;
-                break;
-            }
-        }
-        if(r!=-1 && !arg.equals(" ") && arg.length()==1){ //si la note n'a ni "#" ni "b"
-            r=r;
-        }
-        else if(r!=-1 && !arg.equals(" ") && arg.length()==2){ //si il y a "#" ou "b"
-            if(arg.charAt(1) == '#'){
-                r++;
-            }
-            else if(arg.charAt(1) == 'b'){
-                r--;
-            }
-        }
-        else{
-            System.out.println("!!! Note non reconnue !!!");
-            r=-1;
-        }
-        return r;
-    }
-    
-/**
- * Transforme chaine de caractere en int representant un mode avec gestion des erreurs
- * @param arg entree utilisateur
- * @return int representant un mode
- */
-    public static int detecteMode(String arg){
-        if(arg.equalsIgnoreCase("majeur")){
-            return 0;
-        }
-        else if(arg.equalsIgnoreCase("mineur")){
-            return 1;
-        }
-        else{
-            System.out.println("!!! Mode non reconnu !!!");
-            return -1;
-        }
-    }
-    
-/**
  * Transforme une chaine de caracteres en int avec gestion des erreurs
  * @param arg entree utilisateur
- * @return int
+ * @return r valuer entree par l'utilisateur, ou -1 si ar n'est pas un int
  */
     public static int detecterInt(String arg){
             int r = -1;
@@ -156,5 +84,47 @@ public class Play {
                 System.out.println("!!! Chiffres seulement !!!");
             }
             return r;
+    }
+
+/**
+ * Gere les entree utilisateur sous forme d'int devant etre compris entre max et un min
+ * @param min valeur min minimum desiree
+ * @param max valeur max desiree
+ * @param desc chaine de caracteres a afficher dans la console
+ * @return r int en min et max
+ */
+    public static int choixInt(int min, int max, String desc){
+        Scanner sc = new Scanner(System.in);
+        int r =-1; //valeur par defaut
+        do{
+            System.out.println("-> " + desc + " :"); //interface utilisateur
+            r = detecterInt(sc.nextLine()); //lire ce que l'utilisateur entre
+            System.out.println("");
+        }while(r<min || r>max);
+        return r;
+    }
+
+/**
+ * Transforme les entree utilisateur sous forme de String en int correspondant d'apres les indexes des tableaux
+ * @param in tableau de chaines de caracteres a comparer avec entree utilisateur
+ * @param out valeur en chiffre des differentes options
+ * @param desc chaine de caracteres a afficher dans la console
+ * @return r int correspondant a la chaine entree par l'utilisateur
+ */
+    public static int choixString(String[] in, int[] out, String desc){
+        Scanner sc = new Scanner(System.in);
+        int r = -1; //valeur par defaut
+        String s;
+        do{
+            System.out.println("-> " + desc + " :"); //interface utilisateur
+            s = sc.nextLine(); //lire ce que l'utilisateur entre
+            for(int i=0; i<in.length; i++){
+                if(s.equalsIgnoreCase(in[i])){ //si l'entree utilisateur correspond a une entre du tableau
+                    r = out[i]; //on lui affecte la valeur apprprie
+                    break;
+                }
+            }
+        }while(r==-1);
+        return r;
     }
 }
